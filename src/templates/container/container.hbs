@@ -1,0 +1,22 @@
+import { connect } from 'react-redux'
+
+{{#if component}}
+import {{component}} from '@Components/{{component}}'
+{{/if}}
+import { MapStateToProps, MapDispatchToProps } from 'types/Redux'
+
+export interface PropsFromState {
+}
+
+export interface PropsFromDispatch {
+}
+
+export type {{name}}Props = PropsFromState & PropsFromDispatch
+
+export const mapStateToProps: MapStateToProps<PropsFromState> = (state) => ({ })
+
+export const mapDispatchToProps: MapDispatchToProps<PropsFromDispatch> = { }
+
+const {{name}}Container = connect(mapStateToProps, mapDispatchToProps)({{#if component}}{{component}}{{else}}() => <h1>{{name}} container</h1>{{/if}})
+
+export default {{name}}Container

@@ -1,0 +1,26 @@
+{
+  "name": "trrb-cli",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "Krasimir Nedelchev <kaykayehnn@outlook.com> (https://github.com/kaykayehnn)",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "cross-spawn": "^6.0.5",
+    "fs-extra": "^7.0.1",
+    "handlebars": "^4.0.12",
+    "ora": "^3.0.0",
+    "table": "^5.2.2",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "main": "index.js",
+  "bin": {
+    "trrb-cli": "./bin/trrb.js"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "description": ""
+}
