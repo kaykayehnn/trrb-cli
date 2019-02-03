@@ -18,12 +18,12 @@ program
   .command('new')
   .alias('n')
   .option('--no-commit', 'Skip creating an initial commit')
-  .arguments('<project-directory>')
+  .arguments('<project-name>')
   .description('Initialize a new project')
   .action(newCommand)
 
 program
-  .command('generate <type> <name>')
+  .command('generate <schematic> <name>')
   .alias('g')
   .option('--no-format', 'Preserves name formatting')
   .option('-d, --dry-run', 'Doesn\'t write anything to the file system')
