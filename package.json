@@ -1,8 +1,18 @@
 {
   "name": "trrb-cli",
   "version": "0.1.0",
-  "keywords": [],
+  "description": "CLI for automating common tasks in typescript-react-redux-boilerplate projects",
+  "keywords": [
+    "cli",
+    "boilerplate",
+    "generator",
+    "scaffolding"
+  ],
   "author": "Krasimir Nedelchev <kaykayehnn@outlook.com> (https://github.com/kaykayehnn)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kayKayEhnn/trrb-cli.git"
+  },
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
@@ -14,13 +24,7 @@
     "table": "^5.2.2",
     "validate-npm-package-name": "^3.0.0"
   },
-  "main": "index.js",
   "bin": {
-    "trrb-cli": "./bin/trrb.js"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "description": ""
+    "trrb": "./bin/trrb.js"
+  }
 }
