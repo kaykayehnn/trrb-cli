@@ -28,14 +28,13 @@ const schematicAliases = {
   [REDUCER]: ['r']
 }
 
-// TODO: refactor paths not to use slash for cross-env compatibility
 const mapFns = {
   component: {
     templatePaths: [
-      'component/index.hbs',
-      'component/style.hbs',
-      'component/component.hbs',
-      'component/test.hbs'
+      path.join(COMPONENT, 'index.hbs'),
+      path.join(COMPONENT, 'style.hbs'),
+      path.join(COMPONENT, 'component.hbs'),
+      path.join(COMPONENT, 'test.hbs')
     ],
     getFilePaths: (srcPath, testsPath, dirname, basename) => {
       const componentFolderPath = path.join(srcPath, COMPONENTS_FOLDER, dirname, basename)
@@ -51,8 +50,8 @@ const mapFns = {
   },
   container: {
     templatePaths: [
-      'container/container.hbs',
-      'container/test.hbs'
+      path.join(CONTAINER, 'container.hbs'),
+      path.join(CONTAINER, 'test.hbs')
     ],
     getFilePaths: (srcPath, testsPath, dirname, basename) => {
       const containerFolderPath = path.join(srcPath, CONTAINERS_FOLDER, dirname)
@@ -66,10 +65,10 @@ const mapFns = {
   },
   reducer: {
     templatePaths: [
-      'reducer/actions.hbs',
-      'reducer/reducer.hbs',
-      'reducer/state.hbs',
-      'reducer/test.hbs'
+      path.join(REDUCER, 'actions.hbs'),
+      path.join(REDUCER, 'reducer.hbs'),
+      path.join(REDUCER, 'state.hbs'),
+      path.join(REDUCER, 'test.hbs')
     ],
     getFilePaths: (srcPath, testsPath, dirname, basename) => {
       const storeFolderPath = path.join(srcPath, STORE_FOLDER)
