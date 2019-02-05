@@ -1,16 +1,16 @@
 import { Action } from 'redux'
 
-export enum {{name}}Types {
+export enum {{name}}Action {
   ACTION = 'ACTION'
 }
 
-export interface ActionAction extends Action<{{name}}Types.ACTION> {
+export interface ActionAction extends Action<{{name}}Action.ACTION> {
 }
 
-export type {{name}}Actions = 
+export type {{name}}ActionTypes = 
   | ActionAction
 
 
 export function action (): ActionAction {
-  return { type: {{name}}Types.ACTION }
+  return { type: {{name}}Action.ACTION }
 }

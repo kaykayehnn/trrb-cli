@@ -1,9 +1,9 @@
 import {{name}}State from '@Store/state/{{name}}.state'
-import { {{name}}Actions, {{name}}Types } from '@Store/actions/{{name}}.actions'
+import { {{name}}Action, {{name}}ActionTypes } from '@Store/actions/{{name}}.actions'
 
 const initialState: {{name}}State
 
-export default function {{functionCase name}}Reducer (state = initialState, action: {{name}}Actions) {
+export default function {{functionCase name}}Reducer (state = initialState, action: {{name}}ActionTypes) {
   switch (action.type) {
     default:
       return state
