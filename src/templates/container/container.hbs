@@ -1,3 +1,7 @@
+{{#if component}}
+{{else}}
+import React from 'react'
+{{/if}}
 import { connect } from 'react-redux'
 
 {{#if component}}
@@ -17,6 +21,6 @@ export const mapStateToProps: MapStateToProps<PropsFromState> = (state) => ({ })
 
 export const mapDispatchToProps: MapDispatchToProps<PropsFromDispatch> = { }
 
-const {{name}}Container = connect(mapStateToProps, mapDispatchToProps)({{#if component}}{{component}}{{else}}() => <h1>{{name}} container</h1>{{/if}})
+const {{name}}Container = connect(mapStateToProps, mapDispatchToProps)({{#if component}}{{component}}{{else}}() => React.createElement('h1', null, '{{name}} container'){{/if}})
 
 export default {{name}}Container
