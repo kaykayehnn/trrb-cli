@@ -10,16 +10,6 @@ const exitWithError = require('./helpers/exitWithError')
 
 const repositoryUrl = 'https://github.com/kayKayEhnn/typescript-react-redux-boilerplate.git'
 
-// 0. create dir            - done
-// 1. git clone             - done
-// 2. rm unneeded files     - done
-// 3. git init              - done
-// 4. npm init -y           - done
-// 5. npm i [...deps]       - done
-// 6. npm i -D [...devDeps] - done
-
-// Make initial commit      - done
-
 // These files should be allowed to remain on a failed install,
 // but then silently removed during the next create.
 const errorLogFilePatterns = [
@@ -45,7 +35,7 @@ module.exports = async function newProject (appNameArg, options) {
 
     spinner.succeed('Cloned boilerplate')
 
-    modifyDefaults(appName, appPath)
+    await modifyDefaults(appName, appPath)
 
     console.log('Installing packages. This may take a few minutes.')
     installPackages(appPath)
@@ -205,10 +195,19 @@ function modifyDefaults (appName, appPath) {
     delete packageJsonObject.license
 
     let newPackageJsonObject = readPackageJson(packageJsonPath)
+
+    // Main field defaults to incorrect jest.config.js, other fields are noise
+    // when developing apps, which is the primary use of the boilerplate.
+    delete newPackageJsonObject.main
+    delete newPackageJsonObject.description
+    delete newPackageJsonObject.keywords
+
     let mergedPackageJsonObject = Object.assign(newPackageJsonObject, packageJsonObject)
     let modifiedPackageJsonContents = JSON.stringify(mergedPackageJsonObject, null, 2) + os.EOL
 
     fs.writeFileSync(packageJsonPath, modifiedPackageJsonContents)
+
+    resolve()
   })
 }
 
