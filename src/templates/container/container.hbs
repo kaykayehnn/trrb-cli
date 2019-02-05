@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 {{#if component}}
 import {{component}} from '@Components/{{component}}'
 {{/if}}
-import { MapStateToProps, MapDispatchToProps } from 'types/Redux'
+import { MapStateToProps, MapDispatchToProps, MergeProps } from 'types/Redux'
 
 export interface PropsFromState {
 }
@@ -15,7 +15,7 @@ export interface PropsFromState {
 export interface PropsFromDispatch {
 }
 
-export type {{name}}Props = PropsFromState & PropsFromDispatch
+export type {{name}}Props = MergeProps<PropsFromState, PropsFromDispatch>
 
 export const mapStateToProps: MapStateToProps<PropsFromState> = (state) => ({ })
 
