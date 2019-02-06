@@ -1,4 +1,4 @@
-# trrb-cli [![npm version](https://badgen.net/npm/v/trrb-cli)](https://www.npmjs.com/package/trrb-cli)
+# trrb-cli [![npm version](https://badgen.net/npm/v/trrb-cli?color=blue)](https://www.npmjs.com/package/trrb-cli)
 
 ### How to Install
 
