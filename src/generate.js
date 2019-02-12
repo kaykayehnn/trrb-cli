@@ -118,7 +118,7 @@ module.exports = exports = async function create (type, name, options) {
 
   const templates = await getTemplates(templatePaths)
   const filePaths = getFilePaths(srcPath, testsPath, dirname, basename)
-  const evaluatedTemplates = evaluateTemplates(templates, basename, options)
+  const evaluatedTemplates = evaluateTemplates(templates, { dirname, basename }, options)
 
   const promises = Object.entries(filePaths).map(async ([key, filePath]) => {
     const relativePath = path.relative(projectRoot, filePath)
@@ -160,11 +160,12 @@ async function getTemplates (templatePaths) {
   return templateMap
 }
 
-function evaluateTemplates (templateMap, basename, options) {
+function evaluateTemplates (templateMap, { dirname, basename }, options) {
   const templateKeys = Object.keys(templateMap)
   const context = {
-    name: basename,
-    ...options
+    ...options,
+    dirname,
+    name: basename
   }
 
   return templateKeys.reduce((p, c) => {
