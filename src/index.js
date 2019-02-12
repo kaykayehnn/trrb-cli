@@ -22,7 +22,7 @@ program
 program
   .command('new')
   .alias('n')
-  .option('--no-commit', 'Skip creating an initial commit')
+  .option('--no-commit', 'skip creating an initial commit')
   .arguments('<project-name>')
   .description('Initialize a new project')
   .action(newCommand)
@@ -30,10 +30,11 @@ program
 program
   .command('generate <schematic> <name>')
   .alias('g')
-  .option('--no-format', 'Preserves name formatting')
-  .option('-d, --dry-run', 'Doesn\'t write anything to the file system')
-  .option('-c, --component <name>', 'Link a presentational component to a container')
-  .description('Generate new file from schematic.')
+  .option('--no-style', 'skip style creation for components')
+  .option('--no-format', 'preserves name formatting')
+  .option('-d, --dry-run', 'doesn\'t write anything to the file system')
+  .option('-c, --component <name>', 'link a presentational component to a container')
+  .description('Generate new file from schematic')
   .allowUnknownOption()
   .action(generateCommand)
 

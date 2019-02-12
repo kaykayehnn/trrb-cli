@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react'
+{{#if style}}
 
 import styles from './{{name}}.style.scss'
+{{/if}}
 
 export const {{name}}: FunctionComponent = () => <h1>{{name}} component</h1>

@@ -36,13 +36,13 @@ const mapFns = {
       path.join(COMPONENT, 'component.hbs'),
       path.join(COMPONENT, 'test.hbs')
     ],
-    getFilePaths: (srcPath, testsPath, dirname, basename) => {
+    getFilePaths: (srcPath, testsPath, { dirname, basename }, options) => {
       const componentFolderPath = path.join(srcPath, COMPONENTS_FOLDER, dirname, basename)
       const testFolderPath = path.join(testsPath, COMPONENTS_FOLDER, dirname)
 
       return {
         index: path.join(componentFolderPath, 'index.ts'),
-        style: path.join(componentFolderPath, `${basename}.style.scss`),
+        style: options.style && path.join(componentFolderPath, `${basename}.style.scss`),
         component: path.join(componentFolderPath, `${basename}.component.tsx`),
         test: path.join(testFolderPath, `${basename}.test.tsx`)
       }
@@ -53,7 +53,7 @@ const mapFns = {
       path.join(CONTAINER, 'container.hbs'),
       path.join(CONTAINER, 'test.hbs')
     ],
-    getFilePaths: (srcPath, testsPath, dirname, basename) => {
+    getFilePaths: (srcPath, testsPath, { dirname, basename }, options) => {
       const containerFolderPath = path.join(srcPath, CONTAINERS_FOLDER, dirname)
       const testFolderPath = path.join(testsPath, CONTAINERS_FOLDER, dirname)
 
@@ -70,7 +70,7 @@ const mapFns = {
       path.join(REDUCER, 'state.hbs'),
       path.join(REDUCER, 'test.hbs')
     ],
-    getFilePaths: (srcPath, testsPath, dirname, basename) => {
+    getFilePaths: (srcPath, testsPath, { dirname, basename }, options) => {
       const storeFolderPath = path.join(srcPath, STORE_FOLDER)
       const testFolderPath = path.join(testsPath, REDUCERS_FOLDER)
 
@@ -115,17 +115,20 @@ module.exports = exports = async function create (type, name, options) {
 
   const schematicConfig = mapFns[schematicType]
   const { templatePaths, getFilePaths } = schematicConfig
+  const nameArguments = { dirname, basename }
 
   const templates = await getTemplates(templatePaths)
-  const filePaths = getFilePaths(srcPath, testsPath, dirname, basename)
-  const evaluatedTemplates = evaluateTemplates(templates, { dirname, basename }, options)
+  const filePaths = getFilePaths(srcPath, testsPath, nameArguments, options)
+  const evaluatedTemplates = evaluateTemplates(templates, nameArguments, options)
 
   const promises = Object.entries(filePaths).map(async ([key, filePath]) => {
+    if (!filePath) return `${chalk.gray('CANCELED')} ${key}`
+
     const relativePath = path.relative(projectRoot, filePath)
     const content = evaluatedTemplates[key]
     if (await fs.pathExists(filePath)) {
-      // two whitespaces to align with creation logs
-      return `${chalk.gray('EXISTS')}  ${relativePath}`
+      // extra whitespaces are for alignment with other logs
+      return `${chalk.gray('EXISTS')}   ${relativePath}`
     }
 
     if (!options.dryRun) {
@@ -133,7 +136,7 @@ module.exports = exports = async function create (type, name, options) {
       await fs.writeFile(filePath, content)
     }
 
-    return `${chalk.green('CREATED')} ${relativePath} (${content.length} bytes)`
+    return `${chalk.green('CREATED')}  ${relativePath} (${content.length} bytes)`
   })
 
   const output = await Promise.all(promises)
