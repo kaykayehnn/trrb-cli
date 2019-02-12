@@ -1,5 +1,6 @@
 const commander = require('commander')
 const chalk = require('chalk').default
+const updateNotifier = require('update-notifier')
 const table = require('table').table
 
 const newCommand = require('./new')
@@ -7,6 +8,10 @@ const generateCommand = require('./generate')
 
 const packageJson = require('../package.json')
 const { version } = packageJson
+
+// Check for newer version
+updateNotifier({ pkg: packageJson })
+  .notify()
 
 const program = new commander.Command()
 
