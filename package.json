@@ -5,6 +5,9 @@
   "keywords": [
     "cli",
     "boilerplate",
+    "react",
+    "redux",
+    "typescript",
     "generator",
     "scaffolding"
   ],
