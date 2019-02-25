@@ -173,6 +173,7 @@ function modifyDefaults (appName, appPath) {
     let promises = [
       packageJsonPath,
       path.join(appPath, '.travis.yml'),
+      path.join(appPath, 'package-lock.json'),
       path.join(appPath, 'LICENSE'),
       path.join(appPath, 'README.md'),
       path.join(appPath, '.git')
