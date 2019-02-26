@@ -219,6 +219,5 @@ function installPackages (appPath) {
 function createInitialCommit (appPath) {
   spawn.sync('git', ['add', '-A'], { cwd: appPath })
 
-  const commitMessage = JSON.stringify('Initial commit')
-  spawn.sync('git', ['commit', '-m', commitMessage], { cwd: appPath })
+  spawn.sync('git', ['commit', '-m', 'Initial commit'], { cwd: appPath })
 }
