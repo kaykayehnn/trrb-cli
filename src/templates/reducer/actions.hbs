@@ -4,12 +4,9 @@ export const enum {{name}}Action {
   ACTION = 'ACTION'
 }
 
-export interface ActionAction extends Action<{{name}}Action.ACTION> {
-}
+export interface ActionAction extends Action<{{name}}Action.ACTION> {}
 
-export type {{name}}ActionTypes = 
-  | ActionAction
-
+export type {{name}}ActionTypes = ActionAction
 
 export function action (): ActionAction {
   return { type: {{name}}Action.ACTION }

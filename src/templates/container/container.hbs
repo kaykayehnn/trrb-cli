@@ -9,11 +9,9 @@ import {{component}} from '@Components/{{component}}'
 {{/if}}
 import { MapStateToProps, MapDispatchToProps, MergeProps } from 'types/Redux'
 
-export interface PropsFromState {
-}
+export interface PropsFromState {}
 
-export interface PropsFromDispatch {
-}
+export interface PropsFromDispatch {}
 
 export type {{name}}Props = MergeProps<PropsFromState, PropsFromDispatch>
 
@@ -21,6 +19,9 @@ export const mapStateToProps: MapStateToProps<PropsFromState> = (state) => ({ })
 
 export const mapDispatchToProps: MapDispatchToProps<PropsFromDispatch> = { }
 
-export const {{name}}Container = connect(mapStateToProps, mapDispatchToProps)({{#if component}}{{component}}{{else}}() => React.createElement('h1', null, '{{name}} container'){{/if}})
+export const {{name}}Container = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)({{#if component}}{{component}}{{else}}() => React.createElement('h1', null, '{{name}} container'){{/if}})
 
 export default {{name}}Container
