@@ -1,6 +1,6 @@
 {
   "name": "trrb-cli",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "CLI for automating common tasks in typescript-react-redux-boilerplate projects",
   "keywords": [
     "cli",
