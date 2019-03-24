@@ -49,10 +49,7 @@ const mapFns = {
     }
   },
   container: {
-    templatePaths: [
-      path.join(CONTAINER, 'container.hbs'),
-      path.join(CONTAINER, 'test.hbs')
-    ],
+    templatePaths: [path.join(CONTAINER, 'container.hbs'), path.join(CONTAINER, 'test.hbs')],
     getFilePaths: (srcPath, testsPath, { dirname, basename }, options) => {
       const containerFolderPath = path.join(srcPath, CONTAINERS_FOLDER, dirname)
       const testFolderPath = path.join(testsPath, CONTAINERS_FOLDER, dirname)
@@ -84,10 +81,12 @@ const mapFns = {
   }
 }
 
-module.exports = exports = async function create (type, name, options) {
+module.exports = exports = async function create(type, name, options) {
   const schematicTypes = Object.keys(schematicAliases)
 
-  const schematicType = schematicTypes.find(st => type === st || schematicAliases[st].includes(type))
+  const schematicType = schematicTypes.find(
+    st => type === st || schematicAliases[st].includes(type)
+  )
   if (schematicType == null) {
     exitWithError(chalk.red(`${type} is not a supported schematic type`))
   }
@@ -145,11 +144,11 @@ module.exports = exports = async function create (type, name, options) {
 
 exports.schematicAliases = schematicAliases
 
-function classCase (name) {
+function classCase(name) {
   return name.slice(0, 1).toUpperCase() + name.slice(1)
 }
 
-async function getTemplates (templatePaths) {
+async function getTemplates(templatePaths) {
   const promises = templatePaths.map(tp => fs.readFile(path.join(TEMPLATE_PATH, tp), 'utf8'))
   const templates = await Promise.all(promises)
 
@@ -163,7 +162,7 @@ async function getTemplates (templatePaths) {
   return templateMap
 }
 
-function evaluateTemplates (templateMap, { dirname, basename }, options) {
+function evaluateTemplates(templateMap, { dirname, basename }, options) {
   const templateKeys = Object.keys(templateMap)
   const context = {
     ...options,
