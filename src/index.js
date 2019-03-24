@@ -10,14 +10,11 @@ const packageJson = require('../package.json')
 const { version } = packageJson
 
 // Check for newer version
-updateNotifier({ pkg: packageJson })
-  .notify()
+updateNotifier({ pkg: packageJson }).notify()
 
 const program = new commander.Command()
 
-program
-  .version(version, '-v, --version')
-  .usage(`${chalk.green('<command>')} [options]`)
+program.version(version, '-v, --version').usage(`${chalk.green('<command>')} [options]`)
 
 program
   .command('new')
@@ -32,7 +29,7 @@ program
   .alias('g')
   .option('--no-style', 'skip style creation for components')
   .option('--no-format', 'preserves name formatting')
-  .option('-d, --dry-run', 'doesn\'t write anything to the file system')
+  .option('-d, --dry-run', "doesn't write anything to the file system")
   .option('-c, --component <name>', 'link a presentational component to a container')
   .description('Generate new file from schematic')
   .allowUnknownOption()
@@ -52,8 +49,7 @@ program.on('--help', () => {
   console.log(table(data))
 })
 
-program
-  .parse(process.argv)
+program.parse(process.argv)
 
 if (program.args.length === 0) {
   program.help()

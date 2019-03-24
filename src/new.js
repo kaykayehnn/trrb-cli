@@ -12,13 +12,9 @@ const repositoryUrl = 'https://github.com/kayKayEhnn/typescript-react-redux-boil
 
 // These files should be allowed to remain on a failed install,
 // but then silently removed during the next create.
-const errorLogFilePatterns = [
-  'npm-debug.log',
-  'yarn-error.log',
-  'yarn-debug.log'
-]
+const errorLogFilePatterns = ['npm-debug.log', 'yarn-error.log', 'yarn-debug.log']
 
-module.exports = async function newProject (appNameArg, options) {
+module.exports = async function newProject(appNameArg, options) {
   try {
     const appPath = path.resolve(appNameArg)
     const appName = path.basename(appPath)
@@ -68,7 +64,7 @@ module.exports = async function newProject (appNameArg, options) {
   }
 }
 
-function checkAppName (appName) {
+function checkAppName(appName) {
   let validationResult = validateProjectName(appName)
   if (!validationResult.validForNewPackages) {
     console.error(
@@ -83,7 +79,7 @@ function checkAppName (appName) {
   }
 }
 
-function printValidationResults (results) {
+function printValidationResults(results) {
   if (typeof results !== 'undefined') {
     results.forEach(error => {
       console.error(chalk.red(`  *  ${error}`))
@@ -96,7 +92,7 @@ function printValidationResults (results) {
 // installation, lets remove them now.
 // We also special case IJ-based products .idea because it integrates with CRA:
 // https://github.com/facebook/create-react-app/pull/368#issuecomment-243446094
-function isSafeToCreateProjectIn (root, name) {
+function isSafeToCreateProjectIn(root, name) {
   const validFiles = [
     '.DS_Store',
     'Thumbs.db',
@@ -123,9 +119,7 @@ function isSafeToCreateProjectIn (root, name) {
     // IntelliJ IDEA creates module files before CRA is launched
     .filter(file => !/\.iml$/.test(file))
     // Don't treat log files from previous installation as conflicts
-    .filter(
-      file => !errorLogFilePatterns.some(pattern => file.indexOf(pattern) === 0)
-    )
+    .filter(file => !errorLogFilePatterns.some(pattern => file.indexOf(pattern) === 0))
 
   if (conflicts.length > 0) {
     console.error(`The directory ${chalk.green(name)} contains files that could conflict:`)
@@ -150,9 +144,9 @@ function isSafeToCreateProjectIn (root, name) {
 }
 
 // CommandName argument is only for debugging pursposes.
-function promisifySpawn (child, commandName) {
+function promisifySpawn(child, commandName) {
   return new Promise((resolve, reject) => {
-    child.on('close', (code) => {
+    child.on('close', code => {
       if (code !== 0) {
         reject(new Error(`${commandName} exited with code ${code}`))
         return
@@ -163,9 +157,9 @@ function promisifySpawn (child, commandName) {
   })
 }
 
-function modifyDefaults (appName, appPath) {
+function modifyDefaults(appName, appPath) {
   return new Promise(async (resolve, reject) => {
-    const readPackageJson = (path) => JSON.parse(fs.readFileSync(path, 'utf-8'))
+    const readPackageJson = path => JSON.parse(fs.readFileSync(path, 'utf-8'))
 
     let packageJsonPath = path.join(appPath, 'package.json')
     let packageJsonObject = readPackageJson(packageJsonPath)
@@ -212,11 +206,11 @@ function modifyDefaults (appName, appPath) {
   })
 }
 
-function installPackages (appPath) {
+function installPackages(appPath) {
   spawn.sync('npm', ['install', '--prefix', appPath], { stdio: 'inherit' })
 }
 
-function createInitialCommit (appPath) {
+function createInitialCommit(appPath) {
   spawn.sync('git', ['add', '-A'], { cwd: appPath })
 
   spawn.sync('git', ['commit', '-m', 'Initial commit'], { cwd: appPath })
