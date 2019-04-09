@@ -27,6 +27,7 @@ program
 program
   .command('generate <schematic> <name>')
   .alias('g')
+  .option('--no-test', 'skip test creation')
   .option('--no-style', 'skip style creation for components')
   .option('--no-format', 'preserves name formatting')
   .option('-d, --dry-run', "doesn't write anything to the file system")

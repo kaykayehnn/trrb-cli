@@ -9,7 +9,6 @@ require('./helpers/handlebars')
 
 const TEMPLATE_PATH = path.join(__dirname, 'templates')
 const SRC_FOLDER = 'src'
-const TESTS_FOLDER = '__tests__'
 const COMPONENTS_FOLDER = 'components'
 const CONTAINERS_FOLDER = 'containers'
 const STORE_FOLDER = 'store'
@@ -36,27 +35,30 @@ const mapFns = {
       path.join(COMPONENT, 'component.hbs'),
       path.join(COMPONENT, 'test.hbs')
     ],
-    getFilePaths: (srcPath, testsPath, { dirname, basename }, options) => {
+    getFilePaths: (srcPath, { dirname, basename }, options) => {
       const componentFolderPath = path.join(srcPath, COMPONENTS_FOLDER, dirname, basename)
-      const testFolderPath = path.join(testsPath, COMPONENTS_FOLDER, dirname)
 
       return {
         index: path.join(componentFolderPath, 'index.ts'),
         style: options.style && path.join(componentFolderPath, `${basename}.style.scss`),
         component: path.join(componentFolderPath, `${basename}.component.tsx`),
-        test: path.join(testFolderPath, `${basename}.test.jsx`)
+        test: options.test && path.join(componentFolderPath, `${basename}.test.js`)
       }
     }
   },
   container: {
-    templatePaths: [path.join(CONTAINER, 'container.hbs'), path.join(CONTAINER, 'test.hbs')],
-    getFilePaths: (srcPath, testsPath, { dirname, basename }, options) => {
-      const containerFolderPath = path.join(srcPath, CONTAINERS_FOLDER, dirname)
-      const testFolderPath = path.join(testsPath, CONTAINERS_FOLDER, dirname)
+    templatePaths: [
+      path.join(CONTAINER, 'container.hbs'),
+      path.join(CONTAINER, 'index.hbs'),
+      path.join(CONTAINER, 'test.hbs')
+    ],
+    getFilePaths: (srcPath, { dirname, basename }, options) => {
+      const containerFolderPath = path.join(srcPath, CONTAINERS_FOLDER, dirname, basename)
 
       return {
-        container: path.join(containerFolderPath, dirname, `${basename}.container.ts`),
-        test: path.join(testFolderPath, dirname, `${basename}.test.jsx`)
+        container: path.join(containerFolderPath, `${basename}.container.ts`),
+        index: path.join(containerFolderPath, 'index.ts'),
+        test: options.test && path.join(containerFolderPath, `${basename}.test.js`)
       }
     }
   },
@@ -64,18 +66,20 @@ const mapFns = {
     templatePaths: [
       path.join(REDUCER, 'actions.hbs'),
       path.join(REDUCER, 'reducer.hbs'),
+      path.join(REDUCER, 'reducerIndex.hbs'),
       path.join(REDUCER, 'state.hbs'),
       path.join(REDUCER, 'test.hbs')
     ],
-    getFilePaths: (srcPath, testsPath, { dirname, basename }, options) => {
+    getFilePaths: (srcPath, { dirname, basename }, options) => {
       const storeFolderPath = path.join(srcPath, STORE_FOLDER)
-      const testFolderPath = path.join(testsPath, REDUCERS_FOLDER)
+      const reducerFolderPath = path.join(storeFolderPath, REDUCERS_FOLDER, dirname, basename)
 
       return {
         actions: path.join(storeFolderPath, ACTIONS_FOLDER, dirname, `${basename}.actions.ts`),
-        reducer: path.join(storeFolderPath, REDUCERS_FOLDER, dirname, `${basename}.reducer.ts`),
+        reducer: path.join(reducerFolderPath, `${basename}.reducer.ts`),
+        reducerIndex: path.join(reducerFolderPath, 'index.ts'),
         state: path.join(storeFolderPath, STATE_FOLDER, dirname, `${basename}.state.ts`),
-        test: path.join(testFolderPath, dirname, `${basename}.reducer.test.js`)
+        test: options.test && path.join(reducerFolderPath, `${basename}.test.js`)
       }
     }
   }
@@ -105,7 +109,6 @@ module.exports = exports = async function create(type, name, options) {
   }
 
   const srcPath = path.join(projectRoot, SRC_FOLDER)
-  const testsPath = path.join(projectRoot, TESTS_FOLDER)
   const dirname = path.dirname(name)
   let basename = path.basename(name)
   if (options.format) {
@@ -117,7 +120,7 @@ module.exports = exports = async function create(type, name, options) {
   const nameArguments = { dirname, basename }
 
   const templates = await getTemplates(templatePaths)
-  const filePaths = getFilePaths(srcPath, testsPath, nameArguments, options)
+  const filePaths = getFilePaths(srcPath, nameArguments, options)
   const evaluatedTemplates = evaluateTemplates(templates, nameArguments, options)
 
   const promises = Object.entries(filePaths).map(async ([key, filePath]) => {
