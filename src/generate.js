@@ -42,7 +42,7 @@ const mapFns = {
         index: path.join(componentFolderPath, 'index.ts'),
         style: options.style && path.join(componentFolderPath, `${basename}.style.scss`),
         component: path.join(componentFolderPath, `${basename}.component.tsx`),
-        test: options.test && path.join(componentFolderPath, `${basename}.test.js`)
+        test: options.test && path.join(componentFolderPath, `${basename}.test.tsx`)
       }
     }
   },
@@ -58,7 +58,7 @@ const mapFns = {
       return {
         container: path.join(containerFolderPath, `${basename}.container.ts`),
         index: path.join(containerFolderPath, 'index.ts'),
-        test: options.test && path.join(containerFolderPath, `${basename}.test.js`)
+        test: options.test && path.join(containerFolderPath, `${basename}.test.ts`)
       }
     }
   },
@@ -79,7 +79,7 @@ const mapFns = {
         reducer: path.join(reducerFolderPath, `${basename}.reducer.ts`),
         reducerIndex: path.join(reducerFolderPath, 'index.ts'),
         state: path.join(storeFolderPath, STATE_FOLDER, dirname, `${basename}.state.ts`),
-        test: options.test && path.join(reducerFolderPath, `${basename}.test.js`)
+        test: options.test && path.join(reducerFolderPath, `${basename}.test.ts`)
       }
     }
   }
