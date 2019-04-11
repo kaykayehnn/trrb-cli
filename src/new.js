@@ -58,6 +58,11 @@ module.exports = async function newProject(appNameArg, options) {
     console.log(chalk.cyan('  cd'), path.relative(process.cwd(), appPath))
     console.log(`  ${chalk.cyan(`npm start`)}`)
     console.log()
+    console.log(
+      `Don\'t forget to resolve any occurrences of the ${chalk
+        .hex('#E9075A')
+        .bold.inverse('FIXME:')} comments`
+    )
     console.log('Happy hacking!')
   } catch (e) {
     exitWithError(chalk.red(e.message))
