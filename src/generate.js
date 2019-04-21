@@ -10,7 +10,6 @@ require('./helpers/handlebars')
 const TEMPLATE_PATH = path.join(__dirname, 'templates')
 const SRC_FOLDER = 'src'
 const COMPONENTS_FOLDER = 'components'
-const CONTAINERS_FOLDER = 'containers'
 const STORE_FOLDER = 'store'
 const REDUCERS_FOLDER = 'reducers'
 const ACTIONS_FOLDER = 'actions'
@@ -53,12 +52,12 @@ const mapFns = {
       path.join(CONTAINER, 'test.hbs')
     ],
     getFilePaths: (srcPath, { dirname, basename }, options) => {
-      const containerFolderPath = path.join(srcPath, CONTAINERS_FOLDER, dirname, basename)
+      const componentFolderPath = path.join(srcPath, COMPONENTS_FOLDER, dirname, basename)
 
       return {
-        container: path.join(containerFolderPath, `${basename}.container.ts`),
-        index: path.join(containerFolderPath, 'index.ts'),
-        test: options.test && path.join(containerFolderPath, `${basename}.test.ts`)
+        container: path.join(componentFolderPath, `${basename}.component.ts`),
+        index: path.join(componentFolderPath, 'index.ts'),
+        test: options.test && path.join(componentFolderPath, `${basename}.test.ts`)
       }
     }
   },

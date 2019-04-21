@@ -19,7 +19,7 @@ export const mapStateToProps: MapStateToProps<PropsFromState> = state => ({ })
 
 export const mapDispatchToProps: MapDispatchToProps<PropsFromDispatch> = { }
 
-export const {{name}}Container = connect(
+export const {{name}} = connect(
   mapStateToProps,
   mapDispatchToProps
-)({{#if component}}{{component}}{{else}}() => React.createElement('h1', null, '{{name}} container'){{/if}})
+)({{#if component}}{{component}}{{else}}() => React.createElement('h1', null, '{{name}} component'){{/if}})
