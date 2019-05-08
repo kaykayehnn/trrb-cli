@@ -90,7 +90,7 @@ module.exports = exports = async function create(type, name, options) {
   const schematicType = schematicTypes.find(
     st =>
       type.toUpperCase() === st.toUpperCase() ||
-      schematicAliases[st].some(sa => sa.toUpperCase() === type)
+      schematicAliases[st].some(sa => sa.toUpperCase() === type.toUpperCase())
   )
   if (schematicType == null) {
     exitWithError(chalk.red(`${type} is not a supported schematic type`))
