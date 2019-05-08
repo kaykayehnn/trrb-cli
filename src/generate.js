@@ -23,7 +23,7 @@ const REDUCER = 'reducer'
 const schematicAliases = {
   [COMPONENT]: ['c', 'pc'],
   [CONTAINER]: ['cr', 'cc'],
-  [REDUCER]: ['r']
+  [REDUCER]: ['r'],
 }
 
 const mapFns = {
@@ -32,7 +32,7 @@ const mapFns = {
       path.join(COMPONENT, 'index.hbs'),
       path.join(COMPONENT, 'style.hbs'),
       path.join(COMPONENT, 'component.hbs'),
-      path.join(COMPONENT, 'test.hbs')
+      path.join(COMPONENT, 'test.hbs'),
     ],
     getFilePaths: (srcPath, { dirname, basename }, options) => {
       const componentFolderPath = path.join(srcPath, COMPONENTS_FOLDER, dirname, basename)
@@ -41,15 +41,15 @@ const mapFns = {
         index: path.join(componentFolderPath, 'index.ts'),
         style: options.style && path.join(componentFolderPath, `${basename}.style.scss`),
         component: path.join(componentFolderPath, `${basename}.component.tsx`),
-        test: options.test && path.join(componentFolderPath, `${basename}.test.tsx`)
+        test: options.test && path.join(componentFolderPath, `${basename}.test.tsx`),
       }
-    }
+    },
   },
   container: {
     templatePaths: [
       path.join(CONTAINER, 'container.hbs'),
       path.join(CONTAINER, 'index.hbs'),
-      path.join(CONTAINER, 'test.hbs')
+      path.join(CONTAINER, 'test.hbs'),
     ],
     getFilePaths: (srcPath, { dirname, basename }, options) => {
       const componentFolderPath = path.join(srcPath, COMPONENTS_FOLDER, dirname, basename)
@@ -57,9 +57,9 @@ const mapFns = {
       return {
         container: path.join(componentFolderPath, `${basename}.component.ts`),
         index: path.join(componentFolderPath, 'index.ts'),
-        test: options.test && path.join(componentFolderPath, `${basename}.test.ts`)
+        test: options.test && path.join(componentFolderPath, `${basename}.test.ts`),
       }
-    }
+    },
   },
   reducer: {
     templatePaths: [
@@ -67,7 +67,7 @@ const mapFns = {
       path.join(REDUCER, 'reducer.hbs'),
       path.join(REDUCER, 'reducerIndex.hbs'),
       path.join(REDUCER, 'state.hbs'),
-      path.join(REDUCER, 'test.hbs')
+      path.join(REDUCER, 'test.hbs'),
     ],
     getFilePaths: (srcPath, { dirname, basename }, options) => {
       const storeFolderPath = path.join(srcPath, STORE_FOLDER)
@@ -78,10 +78,10 @@ const mapFns = {
         reducer: path.join(reducerFolderPath, `${basename}.reducer.ts`),
         reducerIndex: path.join(reducerFolderPath, 'index.ts'),
         state: path.join(storeFolderPath, STATE_FOLDER, dirname, `${basename}.state.ts`),
-        test: options.test && path.join(reducerFolderPath, `${basename}.test.ts`)
+        test: options.test && path.join(reducerFolderPath, `${basename}.test.ts`),
       }
-    }
-  }
+    },
+  },
 }
 
 module.exports = exports = async function create(type, name, options) {
@@ -169,7 +169,7 @@ function evaluateTemplates(templateMap, { dirname, basename }, options) {
   const context = {
     ...options,
     dirname,
-    name: basename
+    name: basename,
   }
 
   return templateKeys.reduce((p, c) => {
