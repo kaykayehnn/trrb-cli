@@ -20,6 +20,7 @@ program
   .command('new')
   .alias('n')
   .option('--no-commit', 'skip creating an initial commit')
+  .option('-b,--branch', 'clone a specific branch')
   .arguments('<project-name>')
   .description('Initialize a new project')
   .action(newCommand)

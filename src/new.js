@@ -26,7 +26,12 @@ module.exports = async function newProject(appNameArg, options) {
 
     let spinner = ora('Cloning boilerplate...').start()
 
-    let child = spawn('git', ['clone', repositoryUrl, appPath, '--depth=1'])
+    const args = ['clone', repositoryUrl, appPath, '--depth=1']
+    if (options.branch) {
+      args.push('--single-branch', '-b', options.branch)
+    }
+
+    let child = spawn('git', args)
     await promisifySpawn(child, 'git clone')
 
     spinner.succeed('Cloned boilerplate')
