@@ -28,7 +28,7 @@ module.exports = async function newProject(appNameArg, options) {
 
     const args = ['clone', repositoryUrl, appPath, '--depth=1']
     if (options.branch) {
-      args.push('--single-branch', '-b', options.branch)
+      args.push('--single-branch', '--branch', options.branch)
     }
 
     let child = spawn('git', args)
