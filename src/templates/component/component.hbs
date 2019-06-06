@@ -4,7 +4,9 @@ import React, { FunctionComponent } from 'react'
 import styles from './{{name}}.style.scss'
 {{/if}}
 
-const {{name}}: FunctionComponent = () => {
+export interface {{name}}Props {}
+
+const {{name}}: FunctionComponent<{{name}}Props> = () => {
   return <h1>{{name}} component</h1>
 }
 
