@@ -39,7 +39,7 @@ const mapFns = {
 
       return {
         index: path.join(componentFolderPath, 'index.ts'),
-        style: options.style && path.join(componentFolderPath, `${basename}.style.scss`),
+        style: options.style && path.join(componentFolderPath, `${basename}.module.scss`),
         component: path.join(componentFolderPath, `${basename}.component.tsx`),
         test: options.test && path.join(componentFolderPath, `${basename}.test.tsx`),
       }
