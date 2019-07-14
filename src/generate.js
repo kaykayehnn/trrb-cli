@@ -55,9 +55,9 @@ const mapFns = {
       const componentFolderPath = path.join(srcPath, COMPONENTS_FOLDER, dirname, basename)
 
       return {
-        container: path.join(componentFolderPath, `${basename}.component.ts`),
+        container: path.join(componentFolderPath, `${basename}.component.tsx`),
         index: path.join(componentFolderPath, 'index.ts'),
-        test: options.test && path.join(componentFolderPath, `${basename}.test.ts`),
+        test: options.test && path.join(componentFolderPath, `${basename}.test.tsx`),
       }
     },
   },

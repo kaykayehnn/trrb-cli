@@ -22,6 +22,6 @@ export const mapDispatchToProps: MapDispatchToProps<PropsFromDispatch> = {}
 const {{name}} = connect(
   mapStateToProps,
   mapDispatchToProps
-)({{#if component}}{{component}}{{else}}() => React.createElement('h1', null, '{{name}} component'){{/if}})
+)({{#if component}}{{component}}{{else}}() => <h1>{{name}} component</h1>){{/if}}
 
 export default {{name}}
